@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('SimpleForm confirm')">
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="page-header">
+     <h1>SimpleForm confirm</h1>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <table class="table table-striped table-bordered" th:object="${simpleForm}">
+          <tr>
+            <th class="col-md-3">Text (ftext)</th>
+            <td class="col-md-9" th:text="*{ftext}"></td>
+          </tr>
+          <tr>
+            <th>Date type text (ftdate)</th>
+            <td th:text="*{ftdate}"></td>
+          </tr>
+          <tr>
+            <th>Date (fdate)</th>
+            <td th:text="*{fdate}"></td>
+          </tr>
+          <tr>
+            <th>Number type text (ftnum)</th>
+            <td th:text="*{ftnum}"></td>
+          </tr>
+          <tr>
+            <th>Number (fnum)</th>
+            <td th:text="*{fnum}"></td>
+          </tr>
+          <tr>
+            <th>Textarea (farea)</th>
+            <td th:utext="*{fareaNl2br}"></td>
+          </tr>
+          <tr>
+            <th>Email (femail)</th>
+            <td th:text="*{femail}"></td>
+          </tr>
+          <tr>
+            <th>password (fpass)</th>
+            <td th:text="*{fpass}"></td>
+          </tr>
+          <tr>
+            <th>single select (fselect)</th>
+            <td th:text="*{fselect}"></td>
+          </tr>
+          <tr>
+            <th>multi select (fselect)</th>
+            <td>
+              <p th:each="c : *{fmselect}" th:text="${c}"></p>
+            </td>
+          </tr>
+          <tr>
+            <th>single checkbox (fcheck)</th>
+            <td th:text="*{fcheck}"></td>
+          </tr>
+          <tr>
+            <th>multi checkbox (fchecks)</th>
+            <td>
+              <p th:each="c : *{fchecks}" th:text="${c}"></p>
+            </td>
+          </tr>
+          <tr>
+            <th>radio (fradio)</th>
+            <td th:text="*{fradio}"></td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <div th:replace="_temp :: footer"></div>
+  </div>
+
+  <div th:include="_temp :: script"></div>
+</body>
+</html>

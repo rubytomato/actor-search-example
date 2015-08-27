@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('ACTOR')">
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 th:utext="#{actor.index.title}">actor.index.title</h1>
+      <p th:if="${emptyMessage}" th:text="${emptyMessage}">empty message</p>
+      <p th:if="${errorMessage}" th:text="${errorMessage}">error message</p>
+      <p th:if="${deleteMessage}" th:text="${deleteMessage}">delete message</p>
+    </div>
+
+    <div th:replace="_temp :: nav"></div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <form action="/actor/search" th:action="@{/actor/search}" method="get">
+          <div class="input-group">
+            <input type="text" name="keyword" class="form-control" placeholder="Search for..." />
+            <span class="input-group-btn">
+              <input class="btn btn-default" type="submit" value="Search!" />
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th th:utext="#{actor.id}">id</th>
+              <th th:utext="#{actor.name}">name</th>
+              <th th:utext="#{actor.height}">height</th>
+              <th th:utext="#{actor.blood}">blood</th>
+              <th th:utext="#{actor.birthday}">birthday</th>
+              <th th:utext="#{actor.birthplace}">birthplace</th>
+              <th th:utext="#{actor.update_at}">update_at</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item,iterStat : ${list}">
+              <td>
+                <a class="btn btn-default" href="/actor/${item.id}" th:href="@{/actor/{id}(id=${item.id})}" th:text="${item.id}">1</a>
+              </td>
+              <td th:text="${item.name}">1</td>
+              <td th:text="${item.height != null}? ${item.height} : '-'">1</td>
+              <td th:text="${item.blood != null}? ${item.blood} : '-'">1</td>
+              <td th:text="${item.birthday != null}? ${#dates.format(item.birthday,'yyyy-MM-dd')} : '-'">1</td>
+              <td th:text="(${item.birthplaceId != null}? ${item.birthplaceId} + ':' : '') + (${item.pref != null }? ${item.pref.name} : '(unknown)')"></td>
+              <td th:text="${item.updateAt}">1</td>
+              <td>
+                <a class="btn btn-warning" href="/actor/delete/${item.id}" th:href="@{/actor/delete/{id}(id=${item.id})}">delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="_temp :: footer"></div>
+  </div>
+
+  <div th:include="_temp :: script"></div>
+</body>
+</html>

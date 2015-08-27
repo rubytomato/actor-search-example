@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header (title)">
+  <title th:text="${title}">title</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/vendor/bootstrap-3.3.5/css/bootstrap.min.css" th:href="@{/vendor/bootstrap-3.3.5/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="container">
+
+    <div th:fragment="nav" class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-pills">
+          <li role="presentation"><a href="/actor" th:href="@{/actor}" th:utext="#{actor.nav.index}">index</a></li>
+          <li role="presentation"><a href="/actor/create" th:href="@{/actor/create}" th:utext="#{actor.nav.create}">create</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div th:fragment="footer" class="page-header">
+      <div th:utext="#{footer.text}">original footer</div>
+    </div>
+
+  </div>
+
+  <div th:fragment="script">
+    <script src="/vendor/jquery/jquery-1.11.3.js" th:src="@{/vendor/jquery/jquery-1.11.3.js}"></script>
+    <script src="/vendor/bootstrap-3.3.5/js/bootstrap.js" th:src="@{/vendor/bootstrap-3.3.5/js/bootstrap.js}"></script>
+  </div>
+</body>
+</html>
+

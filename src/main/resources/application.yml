@@ -1,0 +1,43 @@
+# EMBEDDED SERVER CONFIGURATION (ServerProperties)
+server:
+  port: 9000
+
+spring:
+# THYMELEAF (ThymeleafAutoConfiguration)
+  thymeleaf:
+    enabled: true
+    cache: false
+# DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/sample_db
+    username: test_user
+    password: test_user
+# JPA (JpaBaseConfiguration, HibernateJpaAutoConfiguration)
+  jpa:
+    hibernate:
+      show-sql: true
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+# INTERNATIONALIZATION (MessageSourceAutoConfiguration)
+  messages:
+    basename = messages
+    cache-seconds = -1
+    encoding = UTF-8
+
+# ENDPOINTS (AbstractEndpoint subclasses)
+endpoints:
+  enabled: true
+
+# error
+#error:
+#  whitelabel:
+#    enabled: false
+
+settings:
+  maxCount: 100
+
+cron:
+  cron1: 0 * * * * MON-FRI
+  cron2: 0 */2 * * * *

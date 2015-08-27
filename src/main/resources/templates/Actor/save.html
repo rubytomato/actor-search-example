@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('ACTOR SAVE')">
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 th:utext="#{actor.save.title}">actor.save.title</h1>
+    </div>
+
+    <div th:replace="_temp :: nav"></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table" th:object="${actor}">
+          <tr>
+            <th th:utext="#{actor.id}">id</th>
+            <td th:text="*{id}"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.name}">name</th>
+            <td th:text="*{name}"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.height}">height</th>
+            <td th:text="*{height}"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.blood}">blood</th>
+            <td th:text="*{blood}"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.birthday}">birthday</th>
+            <td th:text="*{birthday != null}? *{#dates.format(birthday,'yyyy-MM-dd')} : '-'"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.birthplace}">birthplace</th>
+            <td th:text="*{birthplaceId} + ':' + (*{pref != null}? *{pref.name} : '(unknown)')"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.update_at}">update_at</th>
+            <td th:text="*{updateAt}"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="_temp :: footer"></div>
+  </div>
+
+  <div th:include="_temp :: script"></div>
+</body>
+</html>

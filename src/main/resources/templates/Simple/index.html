@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('SimpleForm index')">
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="page-header">
+     <h1>SimpleForm index</h1>
+     <p th:if="${validationError}" th:text="${validationError}">validation error</p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <form role="form" action="/simple/confirm" th:action="@{/simple/confirm}" th:object="${simpleForm}" method="post">
+          <!-- text -->
+          <div class="form-group">
+            <label class="control-label" for="inputText"><abbr title="required">*</abbr> Text</label>
+            <input type="text" class="form-control" id="inputText" name="ftext" th:field="*{ftext}" />
+            <span th:if="${#fields.hasErrors('ftext')}" th:errors="*{ftext}" class="help-block">error!</span>
+          </div>
+          <!-- date type text -->
+          <div class="form-group">
+            <label class="control-label" for="inputDateText">Date type text</label>
+            <input type="text" class="form-control" id="inputDateText" name="ftdate" th:field="*{ftdate}" />
+            <span th:if="${#fields.hasErrors('ftdate')}" th:errors="*{ftdate}" class="help-block">error!</span>
+          </div>
+          <!-- date -->
+          <div class="form-group">
+            <label class="control-label" for="inputDate">Date</label>
+            <input type="text" class="form-control" id="inputDate" name="fdate" th:field="*{fdate}" />
+            <span th:if="${#fields.hasErrors('fdate')}" th:errors="*{fdate}" class="help-block">error!</span>
+          </div>
+          <!-- number type text -->
+          <div class="form-group">
+            <label class="control-label" for="inputNumberText">Number type text</label>
+            <input type="text" class="form-control" id="inputNumberText" name="ftnum" th:field="*{ftnum}" />
+            <span th:if="${#fields.hasErrors('ftnum')}" th:errors="*{ftnum}" class="help-block">error!</span>
+          </div>
+          <!-- number -->
+          <div class="form-group">
+            <label class="control-label" for="inputNumber">Number</label>
+            <input type="text" class="form-control" id="inputNumber" name="fnum" th:field="*{fnum}" />
+            <span th:if="${#fields.hasErrors('fnum')}" th:errors="*{fnum}" class="help-block">error!</span>
+          </div>
+          <!-- textarea -->
+          <div class="form-group">
+            <label class="control-label" for="inputTextarea1">Textarea</label>
+            <textarea rows="3" cols="80" class="form-control" id="inputTextarea" name="farea" th:field="*{farea}"></textarea>
+            <span th:if="${#fields.hasErrors('farea')}" th:errors="*{farea}" class="help-block">error!</span>
+          </div>
+          <!-- email -->
+          <div class="form-group">
+            <label class="control-label" for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail" name="femail" th:field="*{femail}" />
+            <span th:if="${#fields.hasErrors('femail')}" th:errors="*{femail}" class="help-block">error!</span>
+          </div>
+          <!-- password -->
+          <div class="form-group">
+            <label class="control-label" for="inputPassword"><abbr title="required">*</abbr> Password</label>
+            <input type="password" class="form-control" id="inputPassword" name="fpass" th:field="*{fpass}" />
+            <span th:if="${#fields.hasErrors('fpass')}" th:errors="*{fpass}" class="help-block">error!</span>
+          </div>
+          <!-- select single -->
+          <div class="form-group">
+            <label class="control-label" for="exampleSelect">Select</label>
+            <select class="form-control" id="exampleSelect" name="fselect">
+              <option value="">---</option>
+              <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.key}" th:selected="${item.value} == *{fselect}">pulldown</option>
+            </select>
+            <span th:if="${#fields.hasErrors('fselect')}" th:errors="*{fselect}" class="help-block">error!</span>
+          </div>
+          <!-- select multi -->
+          <div class="form-group">
+            <label class="control-label" for="exampleMSelect">Multi Select</label>
+            <select class="form-control" id="exampleMSelect" name="fmselect" multiple="multiple" size="6">
+              <option value="">---</option>
+              <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.key}" th:field="*{fmselect}">pulldown</option>
+            </select>
+            <span th:if="${#fields.hasErrors('fmselect')}" th:errors="*{fmselect}" class="help-block">error!</span>
+          </div>
+          <!-- checkbox single -->
+          <div class="form-group">
+            <label class="control-label">Single checkbox</label>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="fcheck" value="on" th:field="*{fcheck}" /> Active
+              </label>
+            </div>
+            <span th:if="${#fields.hasErrors('fcheck')}" th:errors="*{fcheck}" class="help-block">error!</span>
+          </div>
+          <!-- checkbox multi -->
+          <div class="form-group">
+            <label class="control-label">Multi checkbox</label>
+            <div class="checkbox" th:each="item : ${checkItems}">
+              <label>
+                <input type="checkbox" name="fchecks" th:value="${item.value}" th:text="${item.key}" th:field="*{fchecks}">checkbox</input>
+              </label>
+            </div>
+            <span th:if="${#fields.hasErrors('fchecks')}" th:errors="*{fchecks}" class="help-block">error!</span>
+          </div>
+          <!-- radio -->
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Radio</label>
+            <div class="radio" th:each="item : ${radioItems}">
+              <label>
+                <input type="radio" name="fradio" th:value="${item.value}" th:text="${item.key}" th:field="*{fradio}">radio</input>
+              </label>
+            </div>
+            <span th:if="${#fields.hasErrors('fradio')}" th:errors="*{fradio}" class="help-block">error!</span>
+          </div>
+          <button type="submit" class="btn btn-default">confirm</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div th:replace="_temp :: footer"></div>
+  </div>
+
+  <div th:include="_temp :: script"></div>
+
+</body>
+</html>
